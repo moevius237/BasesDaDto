@@ -1,7 +1,13 @@
 package com.company.app;
 
+import com.company.model.Department;
+import com.company.model.Employes;
 import com.company.model.Login;
+import com.company.model.Project;
+import com.company.mysql.DepartmentAccesDatabase;
+import com.company.mysql.EmploymentsAccesDatabase;
 import com.company.mysql.LoginHandleDB;
+import com.company.mysql.ProjectAccesDb;
 import com.company.util.DatabaseConnection;
 import com.mysql.cj.log.Log;
 
@@ -26,8 +32,25 @@ public class Main {
         for (Login l : loginHandleDB.getLogins()) {
             System.out.println(l);
         }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+        try {
+            DepartmentAccesDatabase.insert(new Department("iT","Elche","129302312"));
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try{
+            ProjectAccesDb.insert(new Project("proy",19));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try{
+            EmploymentsAccesDatabase.insert(new Employes("Pablo",100), "java","nano nigga","lil nigga");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

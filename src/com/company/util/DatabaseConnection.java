@@ -1,8 +1,13 @@
 package com.company.util;
 
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /*
 *Patrones de diseño
@@ -12,12 +17,17 @@ public class DatabaseConnection {
     private static Connection conn;
 
     static {
-        String user = "root";
-        String password = "admin";
+        Properties properties = new Properties();
+
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/mydb",user,password);
+            properties.load(Files.newBufferedReader(Path.of("datasource.properties")));
+            conn = DriverManager.getConnection(properties.getProperty("db.url"),
+                    properties.getProperty("db.user"),
+                    properties.getProperty("db.password"));
         } catch (SQLException e) {
             System.out.println("Ha habido un error en la conexion");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
