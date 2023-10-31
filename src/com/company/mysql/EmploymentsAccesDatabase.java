@@ -5,6 +5,8 @@ import com.company.model.Project;
 import com.company.util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmploymentsAccesDatabase {
     private static Connection conn = DatabaseConnection.getConn();
@@ -41,5 +43,21 @@ public class EmploymentsAccesDatabase {
         }
         return -1;
     }
+    public static List<Employes> GetEmployeeByDepartment(String departname) {
+        String call = "{call sp_GetEmployeeByDepartment(?)}";
+        List<Employes> employes = new ArrayList<>();
+        try (CallableStatement stmt = conn.prepareCall(call)){
+            stmt.setString(2, departname);
+            stmt.execute();
 
-}
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()){
+                Employes e = new Employes(rs.getString("name"), (rs.getInt("salary")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    }

@@ -50,6 +50,11 @@ public class Login {
     }
 
 
+    /*
+    Creamos un procedimiento almacenado en mysql
+    le llamamos
+     */
+
     public Login(String username, String password, LocalDateTime createAT) {
         this.username = username;
         this.password = password;

@@ -8,7 +8,7 @@ import java.sql.*;
 public class DepartmentAccesDatabase {
     private static Connection conn = DatabaseConnection.getConn();
     //Insert le paso un departamentto no vuelve nada
-    public static int insert(Department dpto){
+    public static int insert(Department dpto) throws SQLException {
         String insert = "INSERT INTO department(username,pass,created_at) VALUES(?,?,?)";
         try(PreparedStatement p = conn.prepareStatement(insert)){
             p.setString(1, dpto.getName());
@@ -24,6 +24,7 @@ public class DepartmentAccesDatabase {
             e.printStackTrace();
         }
         return -1;
+
     }
 
     }
