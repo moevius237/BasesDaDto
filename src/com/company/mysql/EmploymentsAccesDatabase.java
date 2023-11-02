@@ -1,5 +1,6 @@
 package com.company.mysql;
 
+import com.company.model.Department;
 import com.company.model.Employes;
 import com.company.model.Project;
 import com.company.util.DatabaseConnection;
@@ -60,4 +61,29 @@ public class EmploymentsAccesDatabase {
         }
         return null;
     }
+    public static int insertEmployeeComplete(Employes employes, Project project , Department dpto) throws SQLException {
+        conn.setAutoCommit(false);
+        String empIn = "INSERT INTO employes(name, salary, department_name,departmetn_city,proyect_id)VALUES(?,?,?,?,?)";
+        String proIn = "INSERT INTO proyect(name, price)VALUES(?,?)";
+        String depIn = "INSERT INTO department(name,city)VALUES(?,?)";
+
+        try{
+            int idp =ProjectAccesDb.insert(project);
+            if(idp > 0){
+               if( DepartmentAccesDatabase.insert(dpto) != 1){
+                   employes.setId(idp);
+                   employes.setName(dpto.getName());
+                   employes.setName(dpto.getCity());
+                   int id = insert(employes);
+                   if (id != -1){
+                       conn.commit();
+                       return id;
+                   }
+               }
+            }
+        } catch (SQLException e) {
+            conn.rollback();
+            throw new SQLException();
+        }
     }
+}

@@ -53,6 +53,9 @@ public class Main {
             e.printStackTrace();
         }
         System.out.println(EmploymentsAccesDatabase.GetEmployeeByDepartment("IT"));
+        EmploymentsAccesDatabase.insert(new Employes("panchita",20),
+                new Project("Locura",2.3),
+                new Department("Ir","Elche",23123231));
     }
 
     }
