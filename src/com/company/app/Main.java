@@ -9,7 +9,6 @@ import com.company.mysql.EmploymentsAccesDatabase;
 import com.company.mysql.LoginHandleDB;
 import com.company.mysql.ProjectAccesDb;
 import com.company.util.DatabaseConnection;
-import com.mysql.cj.log.Log;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -53,9 +52,12 @@ public class Main {
             e.printStackTrace();
         }
         System.out.println(EmploymentsAccesDatabase.GetEmployeeByDepartment("IT"));
+       /*
         EmploymentsAccesDatabase.insert(new Employes("panchita",20),
-                new Project("Locura",2.3),
-                new Department("Ir","Elche",23123231));
+                new Project("Locura",2.3)
+                new Department("Ir","Elche","23123231",));
+
+        */
     }
 
     }

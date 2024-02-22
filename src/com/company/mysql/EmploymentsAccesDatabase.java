@@ -67,23 +67,24 @@ public class EmploymentsAccesDatabase {
         String proIn = "INSERT INTO proyect(name, price)VALUES(?,?)";
         String depIn = "INSERT INTO department(name,city)VALUES(?,?)";
 
-        try{
-            int idp =ProjectAccesDb.insert(project);
-            if(idp > 0){
-               if( DepartmentAccesDatabase.insert(dpto) != 1){
-                   employes.setId(idp);
-                   employes.setName(dpto.getName());
-                   employes.setName(dpto.getCity());
-                   int id = insert(employes);
-                   if (id != -1){
-                       conn.commit();
-                       return id;
-                   }
-               }
+        try {
+            int idp = ProjectAccesDb.insert(project);
+            if (idp > 0) {
+                if (DepartmentAccesDatabase.insert(dpto) != 1) {
+                    employes.setId(idp);
+                    employes.setName(dpto.getName());
+                    employes.setName(dpto.getCity());
+                    // int id = insert(employes);
+                    //  if (id != -1){
+                    //      conn.commit();
+                    //      return id;
+                    //       }
+                }
             }
         } catch (SQLException e) {
             conn.rollback();
             throw new SQLException();
         }
+        return 0;
     }
 }
